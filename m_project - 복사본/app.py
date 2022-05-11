@@ -163,6 +163,11 @@ def update_like():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
+@app.route("/item", methods=["GET"])
+def movie_get():
+    item_list = list(db.item.find({}, {'_id': False}))
+    return jsonify({'items':item_list})
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

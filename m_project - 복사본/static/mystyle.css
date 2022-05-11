@@ -59,3 +59,7 @@ input::-webkit-calendar-picker-indicator {
     width:100%;
     height:100%;
 }
+.col{
+    height: 300px;
+    width: 250px;
+}

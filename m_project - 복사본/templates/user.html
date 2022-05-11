@@ -29,11 +29,50 @@
         </script>
 
     </head>
-    <body>
-        {% if status %}
-            내 프로필 페이지
-        {% else %}
-            다른 사람 프로필 페이지
-        {% endif %}
-    </body>
+<body class="has-navbar-fixed-top">
+  <nav class="banner" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+              <img src="{{ url_for('static', filename='logo.png') }}">
+              <strong class="is-sparta"
+                      style="font-family: 'Stylish', sans-serif;font-size: larger;">개린이의필수템</strong>
+          </a>
+      </div>
+  </nav>
+  <section class="hero is-white">
+    <div class="hero-body" style="padding-bottom:1rem;margin:auto;min-width: 400px">
+        <article class="media">
+
+            <figure class="media-left" style="align-self: center">
+                <a class="image is-96x96" href="#">
+                    <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
+                </a>
+            </figure>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{ user_info.profile_name }}</strong> <small>@{{ user_info.username }}</small>
+                        <br>
+                        {{ user_info.profile_info }}
+                    </p>
+                </div>
+
+            </div>
+        </article>
+    </div>
+</section>
+  <section class="section">
+
+
+
+  </section>
+  <section class="section">
+      <div id="post-box" class="container">
+          <div class="box">
+
+          </div>
+
+      </div>
+  </section>
+</body>
 </html>

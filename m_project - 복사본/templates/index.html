@@ -31,6 +31,39 @@
 
 
     <script>
+        $(document).ready(function(){
+            listing();
+        });
+
+        function listing() {
+
+
+            $.ajax({
+                type: 'GET',
+                url: '/item',
+                data: {},
+                success: function (response) {
+                    let rows = response['items']
+                    for(let i = 0; i < rows.length; i++) {
+                        let image = rows[i]['image']
+                        let title = rows[i]['title']
+                        let sel = rows[i]['sel']
+
+                        let temp_html = `<div class="col">
+                                                <div class="card h-100">
+                                                    <img src="${image}" class="card-img-top" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${title}</h5>
+                                                        <p class="card-text"></p>
+                                                    </div>
+                                                </div>
+                                            </div>`
+
+                        $('#item_box').append(temp_html)
+                    }
+                }
+            })
+        }
         function posting_item() {
             let url = $('#url').val()
             let sel = $('#sel').val()
@@ -78,7 +111,7 @@
             </div>
         </article>
         <div class="modal" id="modal-post">
-            <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+            <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div class="modal-background">
             <div class="modal-content">
                 <div class="box">
                     <article class="media">
@@ -86,9 +119,9 @@
                             <button onclick="window.open('https://www.danawa.com/pc/')" type="button" class="btn btn-dark" id="link" >다나와</button>
                             <select id="sel" class="form-select" aria-label="Default select example">
                                 <option selected>카테고리</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">노트북</option>
+                                <option value="2">데스크탑용품</option>
+                                <option value="3">악세사리</option>
                             </select>
 
                             <div class="mb-3">
@@ -108,81 +141,167 @@
         </div>
     </section>
 </nav>
+<div class="itembox" id="itembox">
 <div class="laptop">
     <h1>노트북</h1>
-    <div class="row row-cols-3 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4"id="item_box">
+    </div>
 </div>
-</div>
-<div class="device">
-    <h1>주변기기</h1>
-    <div class=wrapper>
-        <div class="box1">box1</div>
-        <div class="box2">box2</div>
-        <div class="box3">box3</div>
+<div class="deskst">
+    <h1>노트북</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="acc">
-    <h1>악세사리</h1>
-    <div class=wrapper>
-        <div class="box1">box1</div>
-        <div class="box2">box2</div>
-        <div class="box3">box3</div>
+    <h1>노트북</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맥북에어</h5>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+    </div>
 
 
 </body>
