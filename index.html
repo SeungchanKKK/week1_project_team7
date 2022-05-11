@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>메인페이지</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <link href='{{ url_for("static", filename="mystyle.css") }}' rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+
+        <script>
+            $(document).ready(function (){
+                listing();
+            });
+
+            function listing() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/item',
+                    data: {},
+                    success: function (response) {
+                        let rows = response['items']
+                        for (let i = 0; i < rows.length; i++) {
+                            let itemname = rows[i]['itemname']
+                            let price = rows[i]['price']
+                            let spec = rows[i]['spec']
+                            let image = rows[i]['image']
+                            let cate = rows[i]['cate']
+
+                            let temp_html = `<div class="col">
+                                                <div class="card">
+                                                    <img src="${image}" class="card-img-top" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${itemname}</h5>
+                                                        <p class="card-text">${price}</p>
+                                                        <p class="spec">${spec}</p>
+                                                    </div>
+                                                </div>
+                                            </div>`
+
+                            if (cate == 1) {
+                                let temp_html = `<div class="col">
+                                                <div class="card">
+                                                    <img src="${image}" class="card-img-top" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${itemname}</h5>
+                                                        <p class="card-text">${price}</p>
+                                                        <p class="spec">${spec}</p>
+                                                    </div>
+                                                </div>
+                                            </div>`
+                                } else {
+                                let temp_html = ``
+                                }
+
+                            $('#cate1-box').append(temp_html)
+
+                        }
+                        alert(response['msg'])
+                    }
+                })
+            }
+        </script>
+        <style>
+        .title-main{
+            margin-top: 15px;
+            margin-left: 25px;
+            margin-bottom: 10px;
+            font-size: 25px;
+            width: 100px;
+            font-weight: bold;
+            float: left
+        }
+        .clear {clear:both; height:0; overflow:hidden;}
+        .box {
+             padding-top: 40px;
+            padding-inline: 20px;
+            padding-bottom: 10px;
+        }
+        .wrap {
+            padding-top: 5px;
+            padding-bottom: 10px;
+            transition: all 0.2s linear;
+        }
+        .col:hover {
+            transform: scale(1.1);
+        }
+        .title-cate {
+            width: 120px;
+            height: 40px;
+            background-color: deepskyblue;
+            border-radius: 10px;
+            font-size: 20px;
+            padding: 10px 0px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        </style>
+
+    </head>
+    <body>
+        <section>
+            <h1 class="title-main">개린이의 아이템</h1>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-outline-dark" onclick="window.location.href='로그인페이지링크'" style="float: right; margin-top: 25px; margin-right: 20px;">
+                    로그인
+                </button>
+            </div>
+        </section>
+        <div class="clear"></div>
+        <section class="hero is-info">
+            <div class="hero-body">
+                <p class="title">
+                    사이트소개
+                </p>
+                <p class="subtitle">
+                    사이트소개
+                </p>
+            </div>
+        </section>
+
+
+
+
+                <div class="box">
+                    <h2 class="title-cate">카테고리1</h2>
+                <div class="wrap">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+
+
+
+
+         <div class="box">
+                    <h2 class="title-cate">카테고리2</h2>
+                <div class="wrap">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-item">아이템</h5>
+                                <p class="card-price">가격</p>
+                                <p>⭐</p>
+                                <p class="card-text">상세설명</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+
+
+
+    </body>
+</html>
