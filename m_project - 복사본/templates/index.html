@@ -58,8 +58,18 @@
                                                     </div>
                                                 </div>
                                             </div>`
+                        if(sel=="컴퓨터용품"){
+                            $('#desk_box_box').append(temp_html)
+                        }
+                        else if(sel=="기타용품"){
+                             $('#acc_box').append(temp_html)
+                        }
+                        else {
+                            $('#labtop_box_box').append(temp_html)
+                        }
 
-                        $('#item_box').append(temp_html)
+
+
                     }
                 }
             })
@@ -121,7 +131,7 @@
                                 <option selected>카테고리</option>
                                 <option value="1">노트북</option>
                                 <option value="2">데스크탑용품</option>
-                                <option value="3">악세사리</option>
+                                <option value="3">기타용품</option>
                             </select>
 
                             <div class="mb-3">
@@ -144,12 +154,12 @@
 <div class="itembox" id="itembox">
 <div class="laptop">
     <h1>노트북</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4"id="item_box">
+    <div class="row row-cols-1 row-cols-md-3 g-4"id="labtop_box">
     </div>
 </div>
 <div class="deskst">
-    <h1>노트북</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <h1>데스크탑용품</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4"id="desk_box">
         <div class="col">
             <div class="card h-100">
                 <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
@@ -225,8 +235,8 @@
     </div>
 </div>
 <div class="acc">
-    <h1>노트북</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <h1>기타용품</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="acc_box">
         <div class="col">
             <div class="card h-100">
                 <img src="http://img.danawa.com/prod_img/500000/476/660/img/12660476_3.jpg?shrink=330:330&_v=20220105143641" class="card-img-top" alt="...">
