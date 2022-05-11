@@ -1,131 +1,189 @@
 <!doctype html>
 <html lang="en">
-    <head>
+<head>
 
-        <!-- Webpage Title -->
-        <title>Home | SWEETER</title>
+    <!-- Webpage Title -->
+    <title>Home | SWEETER</title>
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-                crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
-        <!-- Bulma CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-        <!-- Font Awesome CSS -->
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
 
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 
-        <script>
-            function posting_item() {
-                let url = $('#url').val()
-                let sel = $('#sel').val()
+    <script>
+        function posting_item() {
+            let url = $('#url').val()
+            let sel = $('#sel').val()
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/item',
-                    data: {url_give: url, sel_give: sel},
-                    success: function (response) {
-                        alert(response['msg'])
-                        window.location.reload()
-                    }
-                });
-            }
-        </script>
+            $.ajax({
+                type: 'POST',
+                url: '/item',
+                data: {url_give: url, sel_give: sel},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
 
-    </head>
-    <body>
-    <nav class="banner" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="{{ url_for('static', filename='logo.png') }}">
-                <strong class="is-sparta"
-                        style="font-family: 'Stylish', sans-serif;font-size: larger;">개린이의필수템</strong>
-            </a>
-        </div>
-        <section class="section">
-            <article class="media">
-                <figure class="media-left" style="align-self: center">
-                    <a class="image is-32x32" href="/user/{{ user_info.username }}">
-                        <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
-                    </a>
-                </figure>
-                <div class="media-content">
-                    <div class="field">
-                        <div class="control">
-                            <input id="input-post" class="input is-rounded" placeholder="등록하기"
-                                   onclick='$("#modal-post").addClass("is-active")'>                </div>
-                    </div>
+        function close_box(){
+            $('#modal-post').removeClass("is-active")
+        }
+    </script>
 
-                </div>
-            </article>
-            <div class="modal" id="modal-post">
-                <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
-                <div class="modal-content">
-                    <div class="box">
-                        <article class="media">
-                            <div class="lay">
-    <button onclick="window.open('https://www.danawa.com/pc/')" type="button" class="btn btn-dark" id="link" >다나와</button>
-    <select id="sel" class="form-select" aria-label="Default select example">
-        <option selected>카테고리</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-
-    <div class="mb-3">
-        <input id="url" type="email" class="form-control" id="exampleFormControlInput1" placeholder="URL">
+</head>
+<body>
+<nav class="banner" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <img src="{{ url_for('static', filename='logo.png') }}">
+            <strong class="is-sparta"
+                    style="font-family: 'Stylish', sans-serif;font-size: larger;">개린이의필수템</strong>
+        </a>
     </div>
+    <section class="section">
+        <article class="media">
+            <figure class="media-left" style="align-self: center">
+                <a class="image is-32x32" href="/user/{{ user_info.username }}">
+                    <img class="is-rounded" src="{{ url_for('static', filename=user_info.profile_pic_real) }}">
+                </a>
+            </figure>
+            <div class="media-content">
+                <div class="field">
+                    <div class="control">
+                        <input id="input-post" class="input is-rounded" placeholder="등록하기"
+                               onclick='$("#modal-post").addClass("is-active")'>                </div>
+                </div>
 
-    <div class="mybtns">
-        <button onclick="posting_item()" type="button" class="btn btn-dark">등록하기</button>&nbsp
-        <button type="button" class="btn btn-outline-dark">닫기</button>
+            </div>
+        </article>
+        <div class="modal" id="modal-post">
+            <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+            <div class="modal-content">
+                <div class="box">
+                    <article class="media">
+                        <div class="lay">
+                            <button onclick="window.open('https://www.danawa.com/pc/')" type="button" class="btn btn-dark" id="link" >다나와</button>
+                            <select id="sel" class="form-select" aria-label="Default select example">
+                                <option selected>카테고리</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+
+                            <div class="mb-3">
+                                <input id="url" type="email" class="form-control" id="exampleFormControlInput1" placeholder="URL">
+                            </div>
+
+                            <div class="mybtns">
+                                <button onclick="posting_item()" type="button" class="btn btn-dark">등록하기</button>&nbsp
+                                <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close"
+                    onclick='$("#modal-post").removeClass("is-active")'></button>
+        </div>
+    </section>
+</nav>
+<div class="laptop">
+    <h1>노트북</h1>
+    <div class="row row-cols-3 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+<div class="device">
+    <h1>주변기기</h1>
+    <div class=wrapper>
+        <div class="box1">box1</div>
+        <div class="box2">box2</div>
+        <div class="box3">box3</div>
     </div>
 </div>
-                        </article>
-                    </div>
-                </div>
-                <button class="modal-close is-large" aria-label="close"
-                        onclick='$("#modal-post").removeClass("is-active")'></button>
-            </div>
-        </section>
-    </nav>
-    <div class="laptop">
-        <h1>노트북</h1>
-        <div class=wrapper>
-            <div class="box1">
-                <a class="image is-32x32" href="/detail/{{ user_info.username }}">
-                </a>
-                box1</div>
-            <div class="box2">box2</div>
-            <div class="box3">box3</div>
-        </div>
+<div class="acc">
+    <h1>악세사리</h1>
+    <div class=wrapper>
+        <div class="box1">box1</div>
+        <div class="box2">box2</div>
+        <div class="box3">box3</div>
     </div>
-    <div class="device">
-        <h1>주변기기</h1>
-        <div class=wrapper>
-            <div class="box1">box1</div>
-            <div class="box2">box2</div>
-            <div class="box3">box3</div>
-        </div>
-    </div>
-    <div class="acc">
-        <h1>악세사리</h1>
-        <div class=wrapper>
-            <div class="box1">box1</div>
-            <div class="box2">box2</div>
-            <div class="box3">box3</div>
-        </div>
-    </div>
+</div>
 
 
-    </body>
+</body>
 </html>
