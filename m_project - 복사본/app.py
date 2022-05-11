@@ -5,6 +5,8 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+import requests
+from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
@@ -109,12 +111,32 @@ def save_img():
         return redirect(url_for("home"))
 
 
-@app.route('/posting', methods=['POST'])
+@app.route('/item', methods=['POST'])
 def posting():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        # 포스팅하기
+        user_info = db.users.find_one({"username":payload["id"]})
+        url_receive = request.form['url_give']
+        sel_receive = request.form['sel_give']
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+        data = requests.get(url_receive, headers=headers)
+
+        soup = BeautifulSoup(data.text, 'html.parser')
+
+        title = soup.select_one('meta[property="og:title"]')['content']
+        image = soup.select_one('meta[property="og:image"]')['content']
+
+        doc = {
+            'title': title,
+            'image': image,
+            'sel': sel_receive,
+            'username':user_info["username"]
+        }
+
+        db.item.insert_one(doc)
         return jsonify({"result": "success", 'msg': '포스팅 성공'})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))

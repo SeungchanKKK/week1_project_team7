@@ -25,6 +25,20 @@
 
 
         <script>
+            function posting_item() {
+                let url = $('#url').val()
+                let sel = $('#sel').val()
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/item',
+                    data: {url_give: url, sel_give: sel},
+                    success: function (response) {
+                        alert(response['msg'])
+                        window.location.reload()
+                    }
+                });
+            }
         </script>
 
     </head>
@@ -58,28 +72,24 @@
                 <div class="modal-content">
                     <div class="box">
                         <article class="media">
-                            <div class="media-content">
-                                <div class="field">
-                                    <p class="control">
-                                        <textarea id="textarea-post" class="textarea"
-                                                  placeholder="무슨 생각을 하고 계신가요?"></textarea>
-                                    </p>
-                                </div>
-                                <nav class="level is-mobile">
-                                    <div class="level-left">
+                            <div class="lay">
+    <button onclick="window.open('https://www.danawa.com/pc/')" type="button" class="btn btn-dark" id="link" >다나와</button>
+    <select id="sel" class="form-select" aria-label="Default select example">
+        <option selected>카테고리</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
 
-                                    </div>
-                                    <div class="level-right">
-                                        <div class="level-item">
-                                            <a class="button is-sparta" onclick="post()">포스팅하기</a>
-                                        </div>
-                                        <div class="level-item">
-                                            <a class="button is-sparta is-outlined"
-                                               onclick='$("#modal-post").removeClass("is-active")'>취소</a>
-                                        </div>
-                                    </div>
-                                </nav>
-                            </div>
+    <div class="mb-3">
+        <input id="url" type="email" class="form-control" id="exampleFormControlInput1" placeholder="URL">
+    </div>
+
+    <div class="mybtns">
+        <button onclick="posting_item()" type="button" class="btn btn-dark">등록하기</button>&nbsp
+        <button type="button" class="btn btn-outline-dark">닫기</button>
+    </div>
+</div>
                         </article>
                     </div>
                 </div>
