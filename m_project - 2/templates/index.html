@@ -30,9 +30,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
        <!-- 폰트 -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
     <style>
 
@@ -58,12 +61,12 @@
                         let user = rows[i]['username']
 
                         let temp_html = `<div class="col">
-                                                <button onclick="go_item()" class="card h-100" style="align-items: center">
-                                                    <img src="${image}" class="card-img-top" alt="..." style="align-items: center">
+                                                <button onclick="go_item()" class="card h-100" style="align-items: center; padding: 3px">
+                                                    <img src="${image}" class="card-img-top" alt="..." style="alignment: center">
                                                     <div class ="card-body">
                                                         <h5 class="card-title" style="font-family: 'Stylish', sans-serif;font-size: 20px; font-weight: bolder">${title}</h5>
                                                         <p class="card-text"style="font-family: 'Stylish', sans-serif;font-size: 18px; font-weight: bolder; color: orange" >${price}</p>
-                                                        <p class="u_nm">작성자-${user}</p>
+                                                        <p class="u_nm" style="color: grey">작성자-${user}</p>
                                                     </div>
                                                 </button>
                                             </div>`
@@ -124,7 +127,7 @@
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
             <strong class="is-sparta"
-                    style="font-family: 'Stylish', sans-serif;font-size: xxx-large;">개린이의필수템</strong>
+                    style=" font-family: 'Do Hyeon', sans-serif;font-size: xxx-large; color:cornflowerblue">개린이의필수템</strong>
         </a>
     </div>
     <section class="section">
@@ -170,7 +173,7 @@
                     onclick='$("#modal-post").removeClass("is-active")'></button>
         </div>
     </section>
-    <nav id="btns-me" class="level is-white" style="margin-top:2rem">
+    <nav id="btns-me" class="logout" style="alignment: right">
     <a class="button is-white" aria-label="logout"
        onclick="sign_out()">
         로그아웃

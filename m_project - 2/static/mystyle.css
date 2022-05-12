@@ -28,7 +28,7 @@ body {
 }
 .col{
     width: 10%;
-    height: 50px;
+    height: 60px;
 }
 
 .is-sparta {
@@ -66,7 +66,7 @@ input::-webkit-calendar-picker-indicator {
     height:100%;
 }
 .col{
-    height: 400px;
+    height: 430px;
     width: 300px;
 
 
@@ -166,6 +166,9 @@ input::-webkit-calendar-picker-indicator {
     justify-content: center;
 
 }
-
+.logout{
+    align-items: center;
+    justify-content: right;
+}
 
 
