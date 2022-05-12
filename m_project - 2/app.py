@@ -36,24 +36,29 @@ def home():
 
 @app.route('/detail/<num>')
 def detail(num):
-    r=int(num)
-    print(r)
-    title = db.item.find_one({'num': r})['title']
-    image = db.item.find_one({'num': r})['image']
-    price = db.item.find_one({'num': r})['price']
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        r=int(num)
+        print(r)
+        title = db.item.find_one({'num': r})['title']
+        image = db.item.find_one({'num': r})['image']
+        price = db.item.find_one({'num': r})['price']
+        spec = db.item.find_one({'num': r})['spec']
+        user_info = db.users.find_one({"userId": payload["id"]})
 
 
-    data = {
-            'title':title,
-            'image':image,
-            'price':price
-        }
-    print(data)
+        data = {
+                'title':title,
+                'image':image,
+                'price':price,
+                'spec':spec,
+                'id':user_info
+            }
 
-    return render_template('detail.html', data=data, number=num)
-
-
-
+        return render_template('detail.html', data=data, number=num)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("login"))
 
 
 @app.route('/login')
@@ -151,6 +156,7 @@ def posting():
         title = soup.select_one('meta[property="og:title"]')['content']
         image = soup.select_one('meta[property="og:image"]')['content']
         price = soup.select_one('#blog_content > div.summary_info > div.detail_summary > div.summary_left > div.lowest_area > div.lowest_top > div.row.lowest_price > span.lwst_prc > a > em').text
+        spec = soup.select_one('meta[name="Description"]')['content'].split(":")[1]
         item_list = list(db.item.find({},{'_id':False}))
         count =len(item_list) + 1
 
@@ -160,7 +166,8 @@ def posting():
             'sel': sel_receive,
             'username':user_info["username"],
             'num': count,
-            'price': price
+            'price': price,
+            'spec': spec
         }
 
         db.item.insert_one(doc)
