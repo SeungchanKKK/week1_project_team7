@@ -35,6 +35,14 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
+@app.route('/detail')
+def detail():
+    print("야호")
+
+    return render_template("detail.html")
+
+
+
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
@@ -129,6 +137,7 @@ def posting():
 
         title = soup.select_one('meta[property="og:title"]')['content']
         image = soup.select_one('meta[property="og:image"]')['content']
+        price = soup.select_one('#blog_content > div.summary_info > div.detail_summary > div.summary_left > div.lowest_area > div.lowest_top > div.row.lowest_price > span.lwst_prc > a > em').text
         item_list = list(db.item.find({},{'_id':False}))
         count =len(item_list) + 1
 
@@ -137,7 +146,8 @@ def posting():
             'image': image,
             'sel': sel_receive,
             'username':user_info["username"],
-            'num': count
+            'num': count,
+            'price': price
         }
 
         db.item.insert_one(doc)
@@ -174,4 +184,4 @@ def movie_get():
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=4000, debug=True)

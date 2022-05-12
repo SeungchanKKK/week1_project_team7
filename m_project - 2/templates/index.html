@@ -3,7 +3,7 @@
 <head>
 
     <!-- Webpage Title -->
-    <title>Home | SWEETER</title>
+    <title>개발장비 추천좀!</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -29,6 +29,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
+       <!-- 폰트 -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+
+    <style>
+
+    </style>
+
     <script>
         $(document).ready(function(){
             listing();
@@ -43,17 +52,18 @@
                     let rows = response['items']
                     for(let i = 0; i < rows.length; i++) {
                         let image = rows[i]['image']
-                        let title = rows[i]['title']
+                        let title = rows[i]['title'].split(":")[0]
                         let sel = rows[i]['sel']
+                        let price = rows[i]['price']
 
                         let temp_html = `<div class="col">
-                                                <div class="card h-100">
-                                                    <img src="${image}" class="card-img-top" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">${title}</h5>
-                                                        <p class="card-text"></p>
+                                                <button onclick="go_item()" class="card h-100" style="align-items: center">
+                                                    <img src="${image}" class="card-img-top" alt="..." style="align-items: center">
+                                                    <div class ="card-body">
+                                                        <h5 class="card-title" style="font-family: 'Stylish', sans-serif;font-size: 20px;">${title}</h5>
+                                                        <p class="card-text">${price}</p>
                                                     </div>
-                                                </div>
+                                                </button>
                                             </div>`
                         if(sel=="데스크탑용품"){
                             $('#desk_box').append(temp_html)
@@ -86,6 +96,24 @@
         function close_box(){
             $('#modal-post').removeClass("is-active")
         }
+
+        function sign_out(){
+        $.removeCookie('mytoken', {path: '/'});
+        alert('로그아웃')
+        window.location.href = "/login"
+        }
+
+        function go_item(){
+            $.ajax({
+                url: 'detail.html',
+                data: {},
+                success: function (response) {
+                    alert(response['msg'])
+                }
+            });
+        }
+
+
     </script>
 
 </head>
@@ -93,9 +121,8 @@
 <nav class="banner" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <img src="{{ url_for('static', filename='logo.png') }}">
             <strong class="is-sparta"
-                    style="font-family: 'Stylish', sans-serif;font-size: larger;">개린이의필수템</strong>
+                    style="font-family: 'Stylish', sans-serif;font-size: xxx-large;">개린이의필수템</strong>
         </a>
     </div>
     <section class="section">
@@ -126,11 +153,9 @@
                                 <option value="데스크탑용품">데스크탑용품</option>
                                 <option value="기타용품">기타용품</option>
                             </select>
-
                             <div class="mb-3">
                                 <input id="url" type="email" class="form-control" id="exampleFormControlInput1" placeholder="URL">
                             </div>
-
                             <div class="mybtns">
                                 <button onclick="posting_item()" type="button" class="btn btn-dark">등록하기</button>&nbsp
                                 <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
@@ -143,20 +168,26 @@
                     onclick='$("#modal-post").removeClass("is-active")'></button>
         </div>
     </section>
+    <nav id="btns-me" class="level is-white" style="margin-top:2rem">
+    <a class="button is-white" aria-label="logout"
+       onclick="sign_out()">
+        로그아웃
+    </a>
+</nav>
 </nav>
 <div class="itembox" id="itembox">
     <div class="laptop">
-        <h1>노트북</h1>
+        <h1 class="cate_nm">노트북</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4" id="labtop_box">
         </div>
     </div>
     <div class="deskst">
-        <h1>데스크탑용품</h1>
+        <h1 class="cate_nm">데스크탑용품</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4"id="desk_box">
         </div>
     </div>
     <div class="acc">
-        <h1>기타용품</h1>
+        <h1 class="cate_nm">기타용품</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4" id="acc_box">
         </div>
     </div>
