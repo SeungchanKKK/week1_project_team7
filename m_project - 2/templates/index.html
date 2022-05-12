@@ -55,13 +55,15 @@
                         let title = rows[i]['title'].split(":")[0]
                         let sel = rows[i]['sel']
                         let price = rows[i]['price']
+                        let user = rows[i]['username']
 
                         let temp_html = `<div class="col">
                                                 <button onclick="go_item()" class="card h-100" style="align-items: center">
                                                     <img src="${image}" class="card-img-top" alt="..." style="align-items: center">
                                                     <div class ="card-body">
-                                                        <h5 class="card-title" style="font-family: 'Stylish', sans-serif;font-size: 20px;">${title}</h5>
-                                                        <p class="card-text">${price}</p>
+                                                        <h5 class="card-title" style="font-family: 'Stylish', sans-serif;font-size: 20px; font-weight: bolder">${title}</h5>
+                                                        <p class="card-text"style="font-family: 'Stylish', sans-serif;font-size: 18px; font-weight: bolder; color: orange" >${price}</p>
+                                                        <p class="u_nm">작성자-${user}</p>
                                                     </div>
                                                 </button>
                                             </div>`
