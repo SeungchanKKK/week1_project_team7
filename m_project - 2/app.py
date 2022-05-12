@@ -34,12 +34,25 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+@app.route('/detail/<num>')
+def detail(num):
+    r=int(num)
+    print(r)
+    title = db.item.find_one({'num': r})['title']
+    image = db.item.find_one({'num': r})['image']
+    price = db.item.find_one({'num': r})['price']
 
-@app.route('/detail')
-def detail():
-    print("야호")
 
-    return render_template("detail.html")
+    data = {
+            'title':title,
+            'image':image,
+            'price':price
+        }
+    print(data)
+
+    return render_template('detail.html', data=data, number=num)
+
+
 
 
 
@@ -181,7 +194,7 @@ def update_like():
 def movie_get():
     item_list = list(db.item.find({}, {'_id': False}))
     return jsonify({'items':item_list})
-
+    # 크롤링 메인페이지 제공
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=4000, debug=True)

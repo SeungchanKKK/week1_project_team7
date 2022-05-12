@@ -86,28 +86,33 @@
 
 </style>
 <script>
-      $(document).ready(function(){
-            listing();
-        });
-
        function boxopen(){
             $('#comm-box').show()
         }
         function boxclose(){
             $('#comm-box').hide()
         }
+
+         $(document).ready(function(){
+            listing();
+        });
+       function listing(){
+           alert(data)
+       }
+
+
 </script>
 <body>
 <h1>아이템페이지</h1>
 <div class="item_box" style="max-width: 1500px;">
   <div class="row g-0">
     <div class="item_pic">
-      <img src="https://file.mk.co.kr/meet/neds/2020/09/image_readtop_2020_925135_15995052644345695.jpg" class="img-fluid rounded-start" alt="...">
+      <img src="{{ data.image }}" class="img-fluid rounded-start" alt="..." style="width:70%">
     </div>
     <div class="item_d">
       <div class="card-body">
-        <h1 class="name">노트북</h1>
-          <h4 class="price">가격 1,200,000</h4>
+        <h1 class="name">{{ data.title }}</h1>
+          <h4 class="price">{{ data.price }}</h4>
         <p class="desc"> 스펙, 성능, 등 설명</p>
       </div>
     </div>
@@ -169,3 +174,15 @@
 
 </body>
 </html>
+       function go_item(){
+             $.ajax({
+                type: 'GET',
+                url: '/',
+                data: {},
+                success: function (response){
+                    response
+                }
+             })
+         window.location.href="/detail"
+
+        }

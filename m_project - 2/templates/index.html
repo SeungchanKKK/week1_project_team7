@@ -29,7 +29,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-       <!-- 폰트 -->
+    <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
@@ -59,16 +59,17 @@
                         let sel = rows[i]['sel']
                         let price = rows[i]['price']
                         let user = rows[i]['username']
+                        let num =rows[i]['num']
 
                         let temp_html = `<div class="col">
-                                                <button onclick="go_item()" class="card h-100" style="align-items: center; padding: 3px">
+                                                <a href="/detail/${num}" onclick="go_item(${num})" class="card h-100" style="align-items: center; padding: 3px";>
                                                     <img src="${image}" class="card-img-top" alt="..." style="alignment: center">
                                                     <div class ="card-body">
                                                         <h5 class="card-title" style="font-family: 'Stylish', sans-serif;font-size: 20px; font-weight: bolder">${title}</h5>
-                                                        <p class="card-text"style="font-family: 'Stylish', sans-serif;font-size: 18px; font-weight: bolder; color: orange" >${price}</p>
+                                                        <p class="card-text"style="font-family: 'Stylish', sans-serif;font-size: 18px; font-weight: bolder; color: orange" >${price}원</p>
                                                         <p class="u_nm" style="color: grey">작성자-${user}</p>
                                                     </div>
-                                                </button>
+                                                </a>
                                             </div>`
                         if(sel=="데스크탑용품"){
                             $('#desk_box').append(temp_html)
@@ -103,20 +104,12 @@
         }
 
         function sign_out(){
-        $.removeCookie('mytoken', {path: '/'});
-        alert('로그아웃')
-        window.location.href = "/login"
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃')
+            window.location.href = "/login"
         }
 
-        function go_item(){
-            $.ajax({
-                url: 'detail.html',
-                data: {},
-                success: function (response) {
-                    alert(response['msg'])
-                }
-            });
-        }
+
 
 
     </script>
@@ -174,11 +167,11 @@
         </div>
     </section>
     <nav id="btns-me" class="logout" style="alignment: right">
-    <a class="button is-white" aria-label="logout"
-       onclick="sign_out()">
-        로그아웃
-    </a>
-</nav>
+        <a class="button is-white" aria-label="logout"
+           onclick="sign_out()">
+            로그아웃
+        </a>
+    </nav>
 </nav>
 <div class="itembox" id="itembox">
     <div class="laptop">
